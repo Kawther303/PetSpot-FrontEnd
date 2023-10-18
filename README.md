@@ -1,6 +1,8 @@
 # PetSpot
 
-#### ***By: Kawthar Alaraibi and Bashayer Ali***
+#### ***By:***
+***Kawthar Alaraibi***[linkedin](https://www.linkedin.com/in/kawthar-alaraibi/) [GitHub](https://github.com/Kawther303) 
+***Bashayer Ali***[linkedin](https://www.linkedin.com/in/bashayer-alsalami/) [GitHub]() 
 
 ## Description
 At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-free experience. Our innovative pet shop website, powered by cutting-edge technologies like React and Node.js, has been meticulously crafted to cater to all your pet-related needs. Whether you're looking for a new furry friend to join your family or seeking high-quality pet products, you've come to the right place.
