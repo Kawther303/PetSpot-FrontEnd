@@ -36,5 +36,3 @@ At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-fre
 - [x] 2
 - [ ] 3
 
-
-
