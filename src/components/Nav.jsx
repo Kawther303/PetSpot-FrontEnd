@@ -6,7 +6,7 @@ const Nav = ({ user, handleLogOut }) => {
     userOptions = (
       <nav>
         <h3>Welcome {user.email}!</h3>
-        <Link onClick={handleLogOut} to=" ">Sign Out
+        <Link onClick={handleLogOut} to=" ">Log Out
         </Link>
       </nav>
     )
@@ -17,6 +17,7 @@ const Nav = ({ user, handleLogOut }) => {
       <Link to="/">Home</Link>
       <Link to="/register">Register</Link>
       <Link to="/signin">Sign In</Link>
+      <Link to="/Update profile">Update</Link>
     </nav>
   )
 
@@ -24,11 +25,6 @@ const Nav = ({ user, handleLogOut }) => {
     <header>
       <Link to="/">
         <div className="logo-wrapper" alt="logo">
-          <img
-            className="logo"
-            src="https://avatars.dicebear.com/api/gridy/app.svg"
-            alt="welcome banner"
-          />
         </div>
       </Link>
       {user ? userOptions : publicOptions}

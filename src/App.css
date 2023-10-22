@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
 
 :root {
   --primary-bg: #000411;
@@ -9,7 +11,7 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Oswald', sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--secondary-bg);
@@ -78,6 +80,11 @@ main {
   min-height: calc(100vh - 4em);
   align-items: center;
   justify-content: center;
+  background-color: #D6C7AE;
+  
+}
+.signin{
+  background-image: url(src/assets/welcome.svg);
 }
 
 .home-container img {
@@ -110,6 +117,7 @@ form,
 .input-wrapper {
   margin: auto;
   width: 80%;
+  background-color: #B3A492;
 }
 
 form label {
@@ -193,3 +201,12 @@ form button:disabled {
   align-items: center;
   height: 80vh;
 }
+
+  .form-style{
+    background-color: #967E76;
+    width: 39%;
+    height: fit-content;
+    margin:2%;
+    padding: 1.5%;
+    border-radius: 3%;
+  }

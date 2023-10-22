@@ -19,35 +19,40 @@ const SignIn = ({ setUser }) => {
   }
 
   return (
-    <div className="signin col">
-      <div className="card-overlay centered">
-        <form className="col" onSubmit={handleSubmit}>
-          <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={handleChange}
-              name="email"
-              type="email"
-              placeholder="example@example.com"
-              value={formValues.email}
-              required
-            />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={handleChange}
-              type="password"
-              name="password"
-              value={formValues.password}
-              required
-            />
-          </div>
-          <button disabled={!formValues.email || !formValues.password}>
-            Sign In
-          </button>
-        </form>
-      </div>
+    <div className="signin col main-background" >
+      <form className="col form-style" onSubmit={handleSubmit}>
+      <h1 className="form-heading">Sign In</h1>
+        <div className="col-md-10">
+          <label htmlFor="email">Email</label>
+          <input
+            onChange={handleChange}
+            name="email"
+            type="email"
+            placeholder="example@example.com"
+            value={formValues.email}
+            required
+            className="form-control"
+
+          />
+        </div>
+        <br />
+        <div className="col-md-10">
+          <label htmlFor="password">Password</label>
+          <input
+            onChange={handleChange}
+            type="password"
+            name="password"
+            value={formValues.password}
+            required
+            className="form-control"
+
+          />
+        </div>
+        <br />
+        <button disabled={!formValues.email || !formValues.password}>
+          Sign In
+        </button>
+      </form>
     </div>
   )
 }
