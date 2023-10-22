@@ -6,6 +6,7 @@
 At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-free experience. Our innovative pet shop website, powered by cutting-edge technologies like React and Node.js, has been meticulously crafted to cater to all your pet-related needs. Whether you're looking for a new furry friend to join your family or seeking high-quality pet products, you've come to the right place.
 
 ***
+## Getting Started
 #### Task Tracking
 [Trello board](https://trello.com/b/gcUEvDxf/project-3-pet-spot)
 
@@ -16,7 +17,7 @@ At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-fre
 
 
 #### WireFrame
-[Adobe xd prototype]()
+[Figma](https://www.figma.com/file/TQqDx9sk9tieYWaTXiYDUI/Untitled?type=design&node-id=0%3A1&mode=design&t=VkgI4hunN4nnjp4J-1)
 
 <img width="517" alt="Screenshot 2023-09-28 025951" src="">
 
