@@ -1,3 +1,57 @@
+// import { useState } from "react";
+// import { RegisterUser } from '../services/Auth';
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+
+// const Register = () => {
+//   let navigate = useNavigate();
+//   const [formValues, setFormValues] = useState({
+//     name: "",
+//     email: "",
+//     userType: "",
+//     profilePicture: null,
+//     password: "",
+//     confirmPassword: "",
+//     address: "",
+//     telephone: ""
+//   });
+
+//   const handleChange = (event) => {
+//     const {name, type, files, value} = event.target
+//     const picValue = type === 'file' ? files[0] : value
+//     setFormValues({ ...formValues, [name]: picValue});
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     await axios.post('http://localhost:3001/auth/register')
+//     const formData = new FormData();
+//     formData.append("name", formValues.name);
+//     formData.append("email", formValues.email);
+//     formData.append("password", formValues.password);
+//     formData.append("userType", formValues.userType);
+//     formData.append("file", formValues.profilePicture);
+//     formData.append("address", formValues.address);
+//     formData.append("telephone", formValues.telephone);
+
+//     await RegisterUser(formData);
+//     setFormValues({
+//       name: "",
+//       email: "",
+//       password: "",
+//       confirmPassword: "",
+//       userType: "",
+//       profilePicture: null,
+//       address: "",
+//       telephone: ""
+//     });
+//     navigate("/signin");
+//   };
+
+//   const handleFileChange = (e) => {
+//     setFormValues({ ...formValues, profilePicture: e.target.files[0] });
+//   };
+
 import { useState } from "react"
 import { RegisterUser } from "../services/Auth"
 import { useNavigate } from "react-router-dom"
@@ -8,7 +62,7 @@ const Register = () => {
     name: "",
     email: "",
     userType: "",
-    profilePicture: "",
+    profilePicture: null,
     password: "",
     confirmPassword: "",
     address: "",
@@ -16,43 +70,54 @@ const Register = () => {
   })
 
   const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    })
+  }
+  const handlePicChange = (e) => {
+    setFormValues({
+      ...formValues,
+      profilePicture: e.target.files[0],
+    })
+    console.log(e.target.files[0])
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await RegisterUser({
-      name: formValues.name,
-      email: formValues.email,
-      password: formValues.password,
-      userType: formValues.userType,
-      profilePicture: formValues.profilePicture,
-      address: formValues.address,
-      telephone: formValues.telephone,
-    })
-    setFormValues({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      userType: "",
-      profilePicture: "",
-      address: "",
-      telephone: "",
-    })
-    navigate("/signin")
-  }
-  const handleFileChange = (e) => {
-    e.preventDefault()
-    setFormValues({ ...formValues, profilePicture: e.target.files[0] })
-  }
+    const formData = new FormData()
+    formData.append("name", formValues.name)
+    formData.append("email", formValues.email)
+    formData.append("password", formValues.password)
+    formData.append("userType", formValues.userType)
+    formData.append("profilePicture", formValues.profilePicture)
+    formData.append("address", formValues.address)
+    formData.append("telephone", formValues.telephone)
 
+    try {
+      const response = await RegisterUser(formData)
+      setFormValues({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        userType: "",
+        profilePicture: "",
+        address: "",
+        telephone: "",
+      })
+      navigate("/signin")
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="signin col main-background">
       <form
         className="col form-style"
         onSubmit={handleSubmit}
-        encType="multipart/form-data"
+        enctype="multipart/form-data"
       >
         <h1 className="form-heading">Create New Account</h1>
         <div className="col-md-10">
@@ -113,7 +178,6 @@ const Register = () => {
             onChange={handleChange}
             name="userType"
             type="userType"
-            placeholder="admin"
             value={formValues.userType}
             required
             className="form-control"
@@ -123,7 +187,7 @@ const Register = () => {
         <div className="col-md-10">
           <label htmlFor="profilePicture">Profile Picture</label>
           <input
-            onChange={handleFileChange}
+            onChange={handlePicChange}
             name="profilePicture"
             type="file"
             accept="image/*"
