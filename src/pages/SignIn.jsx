@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { SignInUser } from "../services/Auth"
 import { useNavigate } from "react-router-dom"
+
 const SignIn = ({ setUser }) => {
   let navigate = useNavigate()
 
@@ -15,7 +16,7 @@ const SignIn = ({ setUser }) => {
     const payload = await SignInUser(formValues)
     setFormValues({ email: "", password: "" })
     setUser(payload)
-    navigate("/")
+    navigate("/post")
   }
 
   return (

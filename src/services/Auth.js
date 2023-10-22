@@ -22,7 +22,7 @@ export const RegisterUser = async (data) => {
 
 export const updateUser = async (userData) => {
   try {
-    const response = await axios.put("/auth//updateprofile/:user_id", userData)
+    const response = await axios.put("/auth//edit/:user_id", userData)
     return response.data
   } catch (error) {
     throw new Error(error.response.data.error)
