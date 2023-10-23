@@ -63,7 +63,7 @@ const Register = () => {
       <form
         className="col form-style"
         onSubmit={handleSubmit}
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
       >
         <h1 className="form-heading">Create New Account</h1>
         <div className="col-md-10">

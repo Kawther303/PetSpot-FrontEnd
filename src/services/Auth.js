@@ -20,14 +20,23 @@ export const RegisterUser = async (data) => {
   }
 }
 
-export const updateUser = async (userData) => {
+export const updateUser = async (userData, user_id) => {
   try {
-    const response = await axios.put("/auth//edit/:user_id", userData)
+    const response = await Client.put(`auth/editProfile/${user_id}`, userData)
     return response.data
   } catch (error) {
     throw new Error(error.response.data.error)
   }
 }
+
+// export const showUser = async (userData) => {
+//   try {
+//     const response = await axios.get("auth/show/:user_id", userData)
+//     return response.data
+//   } catch (error) {
+//     throw new Error(error.response.data.error)
+//   }
+// }
 
 export const CheckSession = async () => {
   try {
