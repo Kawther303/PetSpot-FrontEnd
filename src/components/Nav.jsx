@@ -6,7 +6,8 @@ const Nav = ({ user, handleLogOut }) => {
     userOptions = (
       <nav>
         <h3>Welcome {user.email}!</h3>
-        <Link onClick={handleLogOut} to=" ">Log Out
+        <Link onClick={handleLogOut} to=" ">
+          Log Out
         </Link>
       </nav>
     )
@@ -18,14 +19,15 @@ const Nav = ({ user, handleLogOut }) => {
       <Link to="/register">Register</Link>
       <Link to="/signin">Sign In</Link>
       <Link to="/Update profile">Update</Link>
+      <Link to="/pets">Pets</Link>
+      <Link to="/petItems">Items</Link>
     </nav>
   )
 
   return (
     <header>
       <Link to="/">
-        <div className="logo-wrapper" alt="logo">
-        </div>
+        <div className="logo-wrapper" alt="logo"></div>
       </Link>
       {user ? userOptions : publicOptions}
     </header>
