@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const PetList = () => {
   const [petsList, setPetsList] = useState([])
+  const imagePath = `http://localhost:3001/`
 
   useEffect(() => {
     const getDetails = async () => {
@@ -22,7 +23,9 @@ const PetList = () => {
           <section className="image-container">
             <h2>{petList.name}</h2>
             <div>
-              <img src={petList.image} />
+              <img
+                src={`${imagePath}${petList.image.replace('public/', '')}`}
+              />
             </div>
           </section>
           <section className="details">

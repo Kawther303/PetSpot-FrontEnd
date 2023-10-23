@@ -5,23 +5,27 @@ import axios from 'axios'
 const PetItemList = () => {
   const [petItems, setPetItems] = useState([])
 
+  const imagePath = `http://localhost:3001/`
+
   useEffect(() => {
     const getDetails = async () => {
       const response = await axios.get('http://localhost:3001/petItem')
+      console.log(response.data)
       setPetItems(response.data)
     }
     getDetails()
   }, [])
   return (
     <div className="product-content">
-      {console.log('petItems:' + petItems)}
       {petItems.map((petItem) => (
         <div className="cards" key={petItem._id}>
           {/* <Link to={`${petList._id}`}> */}
           <section className="image-container">
             <h2>{petItem.name}</h2>
             <div>
-              <img src={petItem.image} />
+              <img
+                src={`${imagePath}${petItem.image.replace('public/', '')}`}
+              />
             </div>
           </section>
           <section className="details">
