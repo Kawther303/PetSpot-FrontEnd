@@ -7,7 +7,6 @@ const Register = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
-    userType: "",
     profilePicture: null,
     password: "",
     confirmPassword: "",
@@ -36,7 +35,6 @@ const Register = () => {
     formData.append("name", formValues.name)
     formData.append("email", formValues.email)
     formData.append("password", formValues.password)
-    formData.append("userType", formValues.userType)
     formData.append("profilePicture", formValues.profilePicture)
     formData.append("address", formValues.address)
     formData.append("telephone", formValues.telephone)
@@ -48,7 +46,6 @@ const Register = () => {
         email: "",
         password: "",
         confirmPassword: "",
-        userType: "",
         profilePicture: "",
         address: "",
         telephone: "",
@@ -118,17 +115,6 @@ const Register = () => {
           />
         </div>
         <br />
-        <div className="col-md-10">
-          <label htmlFor="userType">User Type</label>
-          <input
-            onChange={handleChange}
-            name="userType"
-            type="userType"
-            value={formValues.userType}
-            required
-            className="form-control"
-          />
-        </div>
         <br />
         <div className="col-md-10">
           <label htmlFor="profilePicture">Profile Picture</label>

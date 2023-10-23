@@ -1,69 +1,118 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { updateUser } from "../services/Auth"
+import { useNavigate } from "react-router-dom"
+
+// const UpdateProfile = ({ user }) => {
+// const [value, setValue] = useState({
+//   name: "",
+//   email: "",
+//   profilePicture: null,
+//   address: "",
+//   telephone: "",
+// })
+
+// const handleChange = (e) => {
+//   const { name, value } = e.target
+//   setValue({
+//     ...value,
+//     [name]: value,
+//   })
+// }
+
+// const handlePicChange = (e) => {
+//   setValue({
+//     ...value,
+//     profilePicture: e.target.files[0],
+//   })
+//   console.log(e.target.files[0])
+// }
+
+// const handleSubmit = async (e) => {
+//   e.preventDefault()
+//   const formData = new FormData()
+//   formData.append("name", value.name)
+//   formData.append("email", value.email)
+//   formData.append("profilePicture", value.profilePicture)
+//   formData.append("address", value.address)
+//   formData.append("telephone", value.telephone)
+
+//   try {
+//     let user_id = user.id
+//     const response = await updateUser(value, user_id)
+//     (formData)
+//     setValue({
+//       name: value.name,
+//       email: value.email,
+//       profilePicture: value.profilePicture,
+//       address: value.address,
+//       telephone: value.telephone,
+//     })
+//     console.log(value)
+//     navigate("/signin")
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 const UpdateProfile = ({ user }) => {
-const [value, setValue] = useState({
-  name: "",
-  email: "",
-  profilePicture: null,
-  address: "",
-  telephone: "",
-})
-
-const handleChange = (e) => {
-  const { name, value } = e.target
-  setValue({
-    ...value,
-    [name]: value,
+  let navigate = useNavigate()
+  const [userValue, setUserValue] = useState({
+    name: user.name,
+    profilePicture: user.profilePicture,
+    address: user.address,
+    telephone: user.telephone,
   })
-}
-
-const handlePicChange = (e) => {
-  setValue({
-    ...value,
-    profilePicture: e.target.files[0],
-  })
-  console.log(e.target.files[0])
-}
-
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  const formData = new FormData()
-  formData.append("name", value.name)
-  formData.append("email", value.email)
-  formData.append("profilePicture", value.profilePicture)
-  formData.append("address", value.address)
-  formData.append("telephone", value.telephone)
-
-  try {
-    let user_id = user.id
-    const response = await updateUser(value, user_id)
-    (formData)
-    setValue({
-      name: value.name,
-      email: value.email,
-      profilePicture: value.profilePicture,
-      address: value.address,
-      telephone: value.telephone,
+  //   useEffect(() => {
+  //     // Runs ONCE after initial rendering
+  //     // and after every rendering ONLY IF `prop` or `state` changes
+  //   }, [user, value]);
+  // }
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setUserValue({
+      ...userValue,
+      [name]: value,
     })
-    console.log(value)
-    navigate("/signin")
-  } catch (error) {
-    console.log(error)
   }
-}
 
+  const handlePicChange = (e) => {
+    setUserValue({
+      ...userValue,
+      profilePicture: e.target.files[0],
+    })
+    console.log(e.target.files[0])
+  }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append("name", userValue.name)
+    formData.append("profilePicture", userValue.profilePicture)
+    formData.append("address", userValue.address)
+    formData.append("telephone", userValue.telephone)
 
+    try {
+      let user_id = user.id
+      const response = await updateUser(userValue, user_id)(formData)
+      setUserValue({
+        name: userValue.name,
+        // email: userValue.email,
+        profilePicture: req.files.path,
+        address: userValue.address,
+        telephone: userValue.telephone,
+      })
+      
+      navigate("/signin")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-      // updateUser(value, user_id)
-
-
+  // updateUser(value, user_id)
 
   //   .then(res => console.log(res))
   //   .catch(res => console.log(err))
-
 
   // const checkToken = async () => {
   //   const user = await CheckSession()
@@ -76,7 +125,6 @@ const handleSubmit = async (e) => {
   //   }
   // }, [])
 
-
   // const [userValues, setUserValues] = useState({
   //   name: "",
   //   email: "",
@@ -88,7 +136,7 @@ const handleSubmit = async (e) => {
   // const handleSubmit = async (e) => {
   //   e.preventDefault()
   //   const payload = await UpdateProfile(userValues)
-  //   setUserValues({    
+  //   setUserValues({
   //   name: "",
   //   email: "",
   //   profilePicture: null,
@@ -104,7 +152,7 @@ const handleSubmit = async (e) => {
   //     [name]: value,
   //   }));
   // };
-  
+
   // const handlePicChange = (e) => {
   //   setValue((prevUserValues) => ({
   //     ...prevUserValues,
@@ -123,7 +171,7 @@ const handleSubmit = async (e) => {
   // }
   //   try {
   //     const response = await updateUser(formData);
-  
+
   //     // Handle the response as needed
   //     if (response.ok) {
   //       console.log('Profile updated successfully');
@@ -149,25 +197,25 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
             name="name"
             type="text"
-            placeholder={user.name}
-            value={value.name}
-            required
+            // placeholder={user.name}
+            value={userValue.name}
+            // required
             className="form-control"
           />
         </div>
-        <br />
-        <div className="col-md-10">
+        {/* <br /> */}
+        {/* <div className="col-md-10">
           <label htmlFor="email">Email</label>
           <input
             onChange={handleChange}
             name="email"
             type="email"
             placeholder={user.email}
-            value={value.email}
+            value={userValue.email}
             required
             className="form-control"
           />
-        </div>
+        </div> */}
         <br />
         <div className="col-md-10">
           <label htmlFor="profilePicture">Profile Picture</label>
@@ -177,7 +225,6 @@ const handleSubmit = async (e) => {
             type="file"
             accept="image/*"
             className="form-control"
-
           />
         </div>
         <br />
@@ -187,8 +234,8 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
             name="address"
             type="address"
-            value={value.address}
-            placeholder={user.address}
+            value={userValue.address}
+            // placeholder={user.address}
             className="form-control"
           />
         </div>
@@ -199,23 +246,19 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
             name="telephone"
             type="telephone"
-            placeholder={user.telephone}
-            value={value.telephone}
+            // placeholder={user.telephone}
+            value={userValue.telephone}
             className="form-control"
           />
           <br />
         </div>
-        <button onClick={updateUser} type="submit">
-          Update
-        </button>
+        <button type="submit">Update</button>
       </form>
     </div>
   )
 }
 
 export default UpdateProfile
-
-
 
 // const ProfileForm = () => {
 //   const [name, setName] = useState('');
