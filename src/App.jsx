@@ -4,6 +4,9 @@ import Nav from './components/Nav'
 import Register from './pages/Register'
 import SignIn from './pages/SignIn'
 import Home from './pages/Home'
+import PetsList from './pages/PetList'
+import PetItemList from './pages/PetItemList'
+
 import './App.css'
 import { CheckSession } from './services/Auth'
 const App = () => {
@@ -19,7 +22,7 @@ const App = () => {
     setUser(user)
   }
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem('token')
     if (token) {
       checkToken()
     }
@@ -33,6 +36,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/pets" element={<PetsList />} />
+          <Route path="/petItems" element={<PetItemList />} />
         </Routes>
       </main>
     </div>
