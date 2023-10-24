@@ -1,57 +1,3 @@
-// import { useState } from "react";
-// import { RegisterUser } from '../services/Auth';
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-
-// const Register = () => {
-//   let navigate = useNavigate();
-//   const [formValues, setFormValues] = useState({
-//     name: "",
-//     email: "",
-//     userType: "",
-//     profilePicture: null,
-//     password: "",
-//     confirmPassword: "",
-//     address: "",
-//     telephone: ""
-//   });
-
-//   const handleChange = (event) => {
-//     const {name, type, files, value} = event.target
-//     const picValue = type === 'file' ? files[0] : value
-//     setFormValues({ ...formValues, [name]: picValue});
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     await axios.post('http://localhost:3001/auth/register')
-//     const formData = new FormData();
-//     formData.append("name", formValues.name);
-//     formData.append("email", formValues.email);
-//     formData.append("password", formValues.password);
-//     formData.append("userType", formValues.userType);
-//     formData.append("file", formValues.profilePicture);
-//     formData.append("address", formValues.address);
-//     formData.append("telephone", formValues.telephone);
-
-//     await RegisterUser(formData);
-//     setFormValues({
-//       name: "",
-//       email: "",
-//       password: "",
-//       confirmPassword: "",
-//       userType: "",
-//       profilePicture: null,
-//       address: "",
-//       telephone: ""
-//     });
-//     navigate("/signin");
-//   };
-
-//   const handleFileChange = (e) => {
-//     setFormValues({ ...formValues, profilePicture: e.target.files[0] });
-//   };
-
 import { useState } from "react"
 import { RegisterUser } from "../services/Auth"
 import { useNavigate } from "react-router-dom"
@@ -61,7 +7,6 @@ const Register = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
-    userType: "",
     profilePicture: null,
     password: "",
     confirmPassword: "",
@@ -90,7 +35,6 @@ const Register = () => {
     formData.append("name", formValues.name)
     formData.append("email", formValues.email)
     formData.append("password", formValues.password)
-    formData.append("userType", formValues.userType)
     formData.append("profilePicture", formValues.profilePicture)
     formData.append("address", formValues.address)
     formData.append("telephone", formValues.telephone)
@@ -102,7 +46,6 @@ const Register = () => {
         email: "",
         password: "",
         confirmPassword: "",
-        userType: "",
         profilePicture: "",
         address: "",
         telephone: "",
@@ -117,7 +60,7 @@ const Register = () => {
       <form
         className="col form-style"
         onSubmit={handleSubmit}
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
       >
         <h1 className="form-heading">Create New Account</h1>
         <div className="col-md-10">
@@ -172,17 +115,6 @@ const Register = () => {
           />
         </div>
         <br />
-        <div className="col-md-10">
-          <label htmlFor="userType">User Type</label>
-          <input
-            onChange={handleChange}
-            name="userType"
-            type="userType"
-            value={formValues.userType}
-            required
-            className="form-control"
-          />
-        </div>
         <br />
         <div className="col-md-10">
           <label htmlFor="profilePicture">Profile Picture</label>
