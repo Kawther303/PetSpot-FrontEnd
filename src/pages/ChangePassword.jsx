@@ -3,26 +3,26 @@ import { useNavigate } from "react-router-dom"
 import { UpdatePassword } from "../services/Auth";
 
 const ChangePassword = () => {
-  let navigate = useNavigate()
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  // let navigate = useNavigate()
+  // const [oldPassword, setOldPassword] = useState("");
+  // const [newPassword, setNewPassword] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+  // const handleFormSubmit = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await UpdatePassword(newPassword, oldPassword)
-      navigate("/signin")
-      // Handle success scenario
-      console.log("Password updated successfully");
-    } catch (error) {
-      // Handle error scenario
-      console.error("Error updating password:", error.response.data.msg);
-      setErrorMessage(error.response.data.msg);
-    }
-  };
-
+  //   try {
+  //     const response = await UpdatePassword(newPassword, oldPassword)
+  //     navigate("/signin")
+  //     // Handle success scenario
+  //     console.log("Password updated successfully");
+  //   } catch (error) {
+  //     // Handle error scenario
+  //     console.error("Error updating password:", error.response.data.msg);
+  //     setErrorMessage(error.response.data.msg);
+  //   }
+  // };
+///////////////////////////////
   //   try {
   //     // let user_id = user.id
   //     const response = await UpdatePassword({
@@ -38,10 +38,10 @@ const ChangePassword = () => {
   //     console.error("Error updating", error);
   //   }
   // };
-  
+  ////////////////////////////////////////////////////
   return (
     <div className="signin col main-background">
-    <form onSubmit={handleFormSubmit}
+    {/* <form onSubmit={handleFormSubmit}
     className="col form-style"
     >
       <h1 className="form-heading">Change Password</h1>
@@ -67,8 +67,8 @@ const ChangePassword = () => {
       </div>
       <br />
       <button type="submit">Update Password</button>
-    </form>
-    </div>
+    </form>*/}
+    </div> 
   );
 };
 
