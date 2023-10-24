@@ -15,7 +15,6 @@ const Nav = ({ user, handleLogOut }) => {
         <Link to="/show">Profile Detail </Link>
         <Link to="/addPet">Add Pet</Link>
         <Link to="/addPetItem">Add Item</Link>
-        <Link to="/Update profile">Update</Link>
         <Link to="/pets">Pets</Link>
         <Link to="/petItems">Items</Link>
       </nav>

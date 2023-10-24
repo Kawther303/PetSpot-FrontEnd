@@ -1,72 +1,82 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { showUser } from "../services/Auth"
+import axios from "axios"
 
 const Show = ({ user }) => {
   let navigate = useNavigate()
-  const [userValue, setUserValue] = useState({
-    name: user.name,
-    email: user.email,
-    profilePicture: user.profilePicture,
-    address: user.address,
-    telephone: user.telephone,
-  })
+  const [newUser, setUserValue] = useState(null)
+  // {
+  // name: user.name,
+  // email: user.email,
+  // profilePicture: user.profilePicture,
+  // address: user.address,
+  // telephone: user.telephone,
+  // })
+  const imagePath = `http://localhost:3001/`
+  useEffect(() => {
+    const getDetails = async () => {
+      const response = await axios.get(
+        `http://localhost:3001/auth/show/${user.id}`
+      )
+      setUserValue(response.data)
+      console.log(user)
+    }
+    getDetails()
+  }, [])
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setUserValue({
-      ...userValue,
-      [name]: value,
-    })
-  }
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target
+  //   setUserValue({
+  //     ...userValue,
+  //     [name]: value,
+  //   })
+  // }
 
-  const handlePicChange = (e) => {
-    setUserValue({
-      ...userValue,
-      profilePicture: e.target.files[0],
-    })
-    console.log(e.target.files[0])
-  }
-  
-//   const handleSubmit = async (e) => {
-//     e.preventDefault()
-//     const formData = new FormData()
-//     formData.append("name", userValue.name)
-//     formData.append("profilePicture", userValue.profilePicture)
-//     formData.append("address", userValue.address)
-//     formData.append("telephone", userValue.telephone)
-//   try {
-//     let user_id = user.id
-//     const response = await showUser(userValue, user_id)
-//     (formData)
-//     setUserValue({
-//       name: userValue.name,
-//       email: userValue.email,
-//       profilePicture: req.files.path,
-//       address: userValue.address,
-//       telephone: userValue.telephone,
-//     })
-    
-//     navigate("/signin")
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-  return (
+  // const handlePicChange = (e) => {
+  //   setUserValue({
+  //     ...userValue,
+  //     profilePicture: e.target.files[0],
+  //   })
+  //   console.log(e.target.files[0])
+  // }
+
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault()
+  //     const formData = new FormData()
+  //     formData.append("name", userValue.name)
+  //     formData.append("profilePicture", userValue.profilePicture)
+  //     formData.append("address", userValue.address)
+  //     formData.append("telephone", userValue.telephone)
+  //   try {
+  //     let user_id = user.id
+  //     const response = await showUser(userValue, user_id)
+  //     (formData)
+  //     setUserValue({
+  //       name: userValue.name,
+  //       email: userValue.email,
+  //       profilePicture: req.files.path,
+  //       address: userValue.address,
+  //       telephone: userValue.telephone,
+  //     })
+
+  //     navigate("/signin")
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+  return newUser ? (
     <div className="signin col main-background">
       <form className="col form-style" encType="multipart/form-data">
-        <h1 className="form-heading">Profile Detail</h1>        
+        <h1 className="form-heading">Profile Detail</h1>
         <br />
         <div>
-          <img src="user.profilePicture.replace(/public/, '')" alt="" />
+          {/* <img src="user.profilePicture.replace(/public/, '')" alt="" /> */}
+         <img src={`${imagePath}${newUser.profilePicture.replace('public/', '')}`} />
         </div>
         <div className="col-md-10">
           <label htmlFor="name">Name</label>
-          <input
-            name="name"
-            value={user.name}
-            className="form-control"
-          />
+          <input name="name" value={newUser.name} className="form-control" />
         </div>
         <br />
         <div className="col-md-10">
@@ -74,7 +84,7 @@ const Show = ({ user }) => {
           <input
             name="email"
             type="email"
-            value={user.email}
+            value={newUser.email}
             required
             className="form-control"
           />
@@ -86,7 +96,7 @@ const Show = ({ user }) => {
           <input
             name="address"
             type="address"
-            value={user.address}
+            value={newUser.address}
             className="form-control"
           />
         </div>
@@ -94,22 +104,19 @@ const Show = ({ user }) => {
         <div className="col-md-10">
           <label htmlFor="telephone">Telephone</label>
           <input
-            
             name="telephone"
             type="telephone"
-            value={user.telephone}
+            value={newUser.telephone}
             className="form-control"
           />
           <br />
         </div>
       </form>
     </div>
-  )
+  ) : null
 }
 
 export default Show
-
-
 
 // import React, { useState, useEffect } from 'react'
 // import axios from 'axios'
