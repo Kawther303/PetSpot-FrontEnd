@@ -12,9 +12,7 @@ const Show = ({ user }) => {
     telephone: user.telephone,
   })
 
-  // const handleChange = (event) => {
-  //   // Handle logic for updating telephone value
-  // }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData()
@@ -81,7 +79,7 @@ const Show = ({ user }) => {
         <div className="col-md-10">
           <label htmlFor="telephone">Telephone</label>
           <input
-            // onChange={handleChange}
+            
             name="telephone"
             type="telephone"
             value={user.telephone}
