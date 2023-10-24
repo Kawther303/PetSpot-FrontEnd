@@ -6,8 +6,10 @@ import SignIn from './pages/SignIn'
 import Home from './pages/Home'
 import PetsList from './pages/PetList'
 import PetItemList from './pages/PetItemList'
+import AddPet from './pages/AddPet'
+import AddPetItem from './pages/AddPetItem'
+import PetItemDetails from './pages/PetItemDetailsjsx'
 
-import './App.css'
 import { CheckSession } from './services/Auth'
 const App = () => {
   const [user, setUser] = useState(null)
@@ -38,6 +40,9 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/pets" element={<PetsList />} />
           <Route path="/petItems" element={<PetItemList />} />
+          <Route path="/addPet" element={<AddPet />} />
+          <Route path="/addPetItem" element={<AddPetItem />} />
+          <Route path="/petItems/:id" element={<PetItemDetails petItem={petItem} />} />
         </Routes>
       </main>
     </div>

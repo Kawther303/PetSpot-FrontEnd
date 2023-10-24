@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 // import { useParams } from 'react-router-dom'
 
-const PetItemList = () => {
+const PetItemDetails = () => {
   const [petItems, setPetItems] = useState([])
 
   const imagePath = `http://localhost:3001/`
@@ -18,7 +18,7 @@ const PetItemList = () => {
     <div className="product-content">
       {petItems.map((petItem) => (
         <div className="cards" key={petItem._id}>
-          <Link to={`${petItems._id}`}> 
+          {/* <Link to={`${petList._id}`}> */}
           <section className="image-container">
             <h2>{petItem.name}</h2>
             <div>
@@ -36,11 +36,11 @@ const PetItemList = () => {
               <p> {petItem.description}</p>
             </div> */}
           </section>
-          </Link>
+          {/* </Link> */}
         </div>
       ))}
     </div>
   )
 }
 
-export default PetItemList
+export default PetItemDetails

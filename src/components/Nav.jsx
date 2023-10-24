@@ -21,6 +21,8 @@ const Nav = ({ user, handleLogOut }) => {
       <Link to="/Update profile">Update</Link>
       <Link to="/pets">Pets</Link>
       <Link to="/petItems">Items</Link>
+      <Link to="/addPet">Add Pet</Link>
+      <Link to="/addPetItem">Add Item</Link>
     </nav>
   )
 
