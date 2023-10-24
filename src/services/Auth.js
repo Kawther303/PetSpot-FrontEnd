@@ -22,7 +22,10 @@ export const RegisterUser = async (data) => {
 
 export const updateUser = async (userData, user_id) => {
   try {
+    console.log("user updated")
     const response = await Client.put(`auth/editProfile/${user_id}`, userData)
+    console.log(response.data)
+
     return response.data
   } catch (error) {
     throw new Error(error.response.data.error)
@@ -32,7 +35,9 @@ export const updateUser = async (userData, user_id) => {
 export const showUser = async (userData, user_id) => {
   try {
     const response = await axios.get(`auth/show/${user_id}`, userData)
+    console.log(response.data)
     return response.data
+   
   } catch (error) {
     throw new Error(error.response.data.error)
   }
@@ -57,6 +62,7 @@ export const CheckSession = async () => {
   try {
     // Checks if the current token if it exists is valid
     const res = await Client.get("/auth/session")
+    console.log(res)
     return res.data
   } catch (error) {
     throw error

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import { updateUser } from "../services/Auth"
 import { useNavigate } from "react-router-dom"
-
+import Client from "../services/api"
 
 const UpdateProfile = ({ user }) => {
+  console.log("update called")
   let navigate = useNavigate()
   const [userValue, setUserValue] = useState({
     name: user.name,
@@ -40,13 +41,13 @@ const UpdateProfile = ({ user }) => {
       let user_id = user.id
       const response = await updateUser(formData, user_id)
       setUserValue({
-        name: userValue.name,
-        profilePicture: req.files.path,
-        address: userValue.address,
-        telephone: userValue.telephone,
+        name: response.name,
+        profilePicture: response.profilePicture,
+        address: response.address,
+        telephone: response.telephone,
       })
 
-      navigate("/signin")
+      navigate("/show")
     } catch (error) {
       console.log(error)
     }
@@ -79,7 +80,6 @@ const UpdateProfile = ({ user }) => {
             type="file"
             accept="image/*"
             className="form-control"
-            
           />
         </div>
         <br />
@@ -91,7 +91,6 @@ const UpdateProfile = ({ user }) => {
             type="address"
             value={userValue.address}
             className="form-control"
-
           />
         </div>
         <br />
@@ -106,11 +105,10 @@ const UpdateProfile = ({ user }) => {
           />
           <br />
         </div>
-        <button type="submit">Update</button>
+        <button>Update</button>
       </form>
     </div>
   )
 }
 
 export default UpdateProfile
-

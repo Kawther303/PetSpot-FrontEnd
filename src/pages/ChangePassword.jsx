@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { UpdatePassword } from "../services/Auth";
 
-const ChangePassword = () => {
+const ChangePassword = ({user}) => {
   // let navigate = useNavigate()
-  // const [oldPassword, setOldPassword] = useState("");
+  // const [oldPassword, setOldPassword] = useState({password: user.password});
   // const [newPassword, setNewPassword] = useState("");
   // const [errorMessage, setErrorMessage] = useState("");
 
   // const handleFormSubmit = async (e) => {
   //   e.preventDefault();
-
+  //   const formData = new FormData()
+  //   formData.append("password", oldPassword.password)
   //   try {
   //     const response = await UpdatePassword(newPassword, oldPassword)
   //     navigate("/signin")
@@ -22,7 +23,7 @@ const ChangePassword = () => {
   //     setErrorMessage(error.response.data.msg);
   //   }
   // };
-///////////////////////////////
+/////////////////////////////////////////////
   //   try {
   //     // let user_id = user.id
   //     const response = await UpdatePassword({
@@ -38,7 +39,7 @@ const ChangePassword = () => {
   //     console.error("Error updating", error);
   //   }
   // };
-  ////////////////////////////////////////////////////
+//////////////////////////////////////////////
   return (
     <div className="signin col main-background">
     {/* <form onSubmit={handleFormSubmit}
@@ -67,7 +68,7 @@ const ChangePassword = () => {
       </div>
       <br />
       <button type="submit">Update Password</button>
-    </form>*/}
+    </form> */}
     </div> 
   );
 };
