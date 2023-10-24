@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 // import { useParams } from 'react-router-dom'
 
 const PetItemList = () => {
@@ -18,24 +19,20 @@ const PetItemList = () => {
     <div className="product-content">
       {petItems.map((petItem) => (
         <div className="cards" key={petItem._id}>
-          <Link to={`${petItems._id}`}> 
-          <section className="image-container">
-            <h2>{petItem.name}</h2>
-            <div>
-              <img
-                src={`${imagePath}${petItem.image.replace('public/', '')}`}
-              />
-            </div>
-          </section>
-          <section className="details">
-            <div className="flex-row space">
-              <h5>Price:{petItem.price}</h5>
-            </div>
-            {/* <div>
-              <h5>Description:</h5>
-              <p> {petItem.description}</p>
-            </div> */}
-          </section>
+          <Link to={`${petItem._id}`}>
+            <section className="image-container">
+              <h2>{petItem.name}</h2>
+              <div>
+                <img
+                  src={`${imagePath}${petItem.image.replace('public/', '')}`}
+                />
+              </div>
+            </section>
+            <section className="details">
+              <div className="flex-row space">
+                <h5>Price:{petItem.price}</h5>
+              </div>
+            </section>
           </Link>
         </div>
       ))}

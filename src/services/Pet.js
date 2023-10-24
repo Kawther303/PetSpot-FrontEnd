@@ -17,14 +17,14 @@ export const AddPetItem = async (data) => {
     throw error
   }
 }
-// export const updatePet = async (petData) => {
-//   try {
-//     const response = await axios.put("/pet/:petId", petData)
-//     return response.data
-//   } catch (error) {
-//     throw new Error(error.response.data.error)
-//   }
-// }
+export const AddCartItem = async (userId, cartItem) => {
+  try {
+    const response = await axios.put(`/cart/addItem/${userId}/${cartItem}`)
+    return response.data
+  } catch (error) {
+    throw new Error(error.response.data.error)
+  }
+}
 
 // export const CheckSession = async () => {
 //   try {
