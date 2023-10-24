@@ -1,6 +1,182 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
+  body {
+    margin: 0;
+  }
+  
+  .App {
+    text-align: center;
+  }
+  
+  div {
+    background-size: cover;
+  }
+  
+  .detail, .detail-header, .listings, .home, .home div, .boat-card, .navbar {
+    display: flex;
+  }
+  
+  .home, .home div {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .detail, .boat-card, .home div {
+    flex-direction: column;
+  }
+  
+  .home div {
+    width: 30em;
+  }
+  
+  .listing-name {
+    min-width: 30em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .listing-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50px;
+  }
+  
+  .listing-img {
+    display: block;
+  }
+  
+  h2 {
+    text-align: left;
+    font-weight: normal;
+  }
+  
+  h1 {
+    font-family: 'Georgia'
+  }
+  
+  h1, h2, h3, h4 {
+    margin: 0;
+  }
+  
+  .navbar {
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: black;
+    padding: 1em;
+    min-height: 2em;
+    font-family: 'Georgia';
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin-left: 0.5em;
+  }
+  
+  .product-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .cards {
+    padding: 1em;
+    width: 18em;
+    height: 15em;
+    background-color: rgb(164, 157, 166);
+    border-radius: 0.5em;
+    margin: 1em;
+    justify-content: space-around;
+    box-shadow: 0 0 0.25em rgba(243, 177, 177, 0.527);
+    color: white;
+    font-family: 'Georgia';
+    cursor: pointer;
+  }
+  
+  .boat-card:hover {
+    transform: scale(1.01);
+  }
+  
+  .cards img {
+    width: 100%;
+    height: 10em;
+    object-fit: center;
+    box-shadow: inset 0 0 1em rgb(0, 0, 0);
+  }
+  
+  .listings {
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1em;
+  }
+  
+  .detail-header {
+    width: 100vw;
+    background-color: rgb(23, 28, 46);
+    justify-content: center;
+    color: white;
+  }
+  
+  .detail-header img {
+    width: 40em;
+    height: 20em;
+    object-fit: cover;
+  }
+  
+  .info-wrapper {
+    min-width: 50vw;
+    max-width: 80vw;
+    margin: 0 auto;
+    text-align: left;
+    border: #242f54 solid 3px;
+    border-radius: 15px;
+    padding: 1vh;
+  }
+  
+  .detail {
+    min-height: 35em;
+    justify-content: space-between;
+  }
+  
+  form {
+    background-color: black;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20em;
+    min-height: 10em;
+    margin: 2em auto;
+    border-radius: 0.25em;
+  }
+  
+  form input {
+    display: block;
+    padding: 0.25em;
+  }
+  
+  button, input {
+    outline: none;
+    border: none;
+    border-radius: 0.25em;
+  }
+  
+  button {
+    padding: 0.5em 2em;
+    background-color: white;
+    font-family: 'Georgia';
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1em;
+  }  
 
 :root {
   --primary-bg: #000411;
