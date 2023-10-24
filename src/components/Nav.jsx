@@ -5,17 +5,19 @@ const Nav = ({ user, handleLogOut }) => {
   if (user) {
     userOptions = (
       <nav>
-
         <h3>Welcome {user.name}!</h3>
         <Link to="/">Home</Link>
-        <Link onClick={handleLogOut} to="/">Log Out
-        </Link>      
-        <Link to='/editprofile/'>Update</Link>
-        <Link to= '/changepassword'>Change Password</Link>
-        <Link to= '/show'>Profile Detail </Link>
+        <Link onClick={handleLogOut} to="/">
+          Log Out
+        </Link>
+        <Link to="/editprofile/">Update</Link>
+        <Link to="/changepassword">Change Password</Link>
+        <Link to="/show">Profile Detail </Link>
         <Link to="/addPet">Add Pet</Link>
-      <Link to="/addPetItem">Add Item</Link>
-     <Link to="/Update profile">Update</Link>
+        <Link to="/addPetItem">Add Item</Link>
+        <Link to="/Update profile">Update</Link>
+        <Link to="/pets">Pets</Link>
+        <Link to="/petItems">Items</Link>
       </nav>
     )
   }
@@ -25,10 +27,8 @@ const Nav = ({ user, handleLogOut }) => {
       <Link to="/register">Register</Link>
       <Link to="/signin">Sign In</Link>
 
- 
       <Link to="/pets">Pets</Link>
       <Link to="/petItems">Items</Link>
-
     </nav>
   )
 
