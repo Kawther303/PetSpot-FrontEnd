@@ -4,43 +4,45 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 const UserCart = ({ user }) => {
-  console.log('user.id:', user.id)
-
-  const [cartStat, setCart] = useState('')
-  const [itemsStat, setItems] = useState('')
-  const [petStat, setPets] = useState('')
+  const userId = user.id
+  console.log('user.id:', userId)
+  let itemList = []
+  let [cartStat, setCart] = useState(null)
+  let [itemsStat, setItems] = useState('')
+  let [petStat, setPets] = useState('')
+  let [theFinal, setFinal] = useState(null)
   let cart
   let items
   let pets
   // const [cartItems, setCartItems] = useState('')
+  let finalList = []
 
   useEffect(() => {
     getDetails()
   }, [])
 
-  let finalList = []
   const imagePath = `http://localhost:3001/`
   const handleClick = (e) => {
     e.preventDefault()
     console.log(e.target.value)
   }
   const getDetails = async () => {
-    const theCart = await axios.get(`http://localhost:3001/cart/${user.id}`)
+    const theCart = await axios.get(`http://localhost:3001/cart/${userId}`)
     // console.log(theCart.data)
     setCart(theCart.data)
     cart = theCart.data
-    // console.log('cart:', cart)
+    console.log('cart:', cartStat)
 
     setItems(theCart.data.itemId)
     setPets(theCart.data.petId)
 
     items = theCart.data.itemId
     pets = theCart.data.petId
-    // console.log('petttsss2:', pets)
+    //const runFunction = await
     getTheItems()
     console.log('final:', finalList)
   }
-  let itemList = []
+
   // count the items
   const getItemsQuantity = async (theItem) => {
     console.log('theItem1._id:', theItem)
@@ -60,7 +62,8 @@ const UserCart = ({ user }) => {
     }
 
     console.log('itemList:', itemList)
-    console.log('items:', items)
+    console.log('items222222:', cartStat)
+
     let result = []
     let k = []
     let container = {}
@@ -85,7 +88,8 @@ const UserCart = ({ user }) => {
           name: theItem1.name,
           price: theItem1.price,
           image: theItem1.image,
-          qty: getItemsQuantity(theItem1._id),
+          // qty: getItemsQuantity(theItem1._id),
+          qty: theItem1.qtyAvailable,
           unit: theItem1.unit,
           theType: 'Item',
           description: theItem1.description
@@ -94,13 +98,13 @@ const UserCart = ({ user }) => {
       console.log('count22:', itemCount)
     }
 
-    console.log('kkkkk:', k)
-    console.log('count:', itemCount)
-    console.log('peeets:', pets)
+    // console.log('kkkkk:', k)
+    // console.log('count:', itemCount)
+    // console.log('peeets:', pets)
 
     for (let i = 0; i < pets.length; i++) {
       let thePet1 = pets[i]
-      console.log('peeets:', thePet1)
+      // console.log('peeets:', thePet1)
       finalList.push({
         id: thePet1._id,
         name: thePet1.name,
@@ -112,12 +116,15 @@ const UserCart = ({ user }) => {
         description: thePet1.description
       })
     }
+    setFinal(finalList)
     console.log(finalList)
   }
 
-  if (itemList.length > 0) {
+  console.log('finals333333s:', theFinal)
+
+  if (theFinal) {
     return (
-      <div className="product-content">
+      <div className="cart-content">
         <div className="header">
           <div className="header">Item Picture </div>
           <div className="header">Type</div>
@@ -128,13 +135,15 @@ const UserCart = ({ user }) => {
           <div className="header">-1</div>
           <div className="header">DEL</div>
         </div>
-        {finalList.map((item) => (
-          <div className="listDetails" key={item}>
-            <div>
-              <img src="" />
+        {theFinal.map((item) => (
+          <div className="listDetails" key={item.id}>
+            <div className="cartImage">
+              {/* <img src="" /> */}
 
-              {/* <img src={`${imagePath}${item.image.replace('public/', '')}`} />
-               */}
+              <img
+                className="cartImage"
+                src={`${imagePath}${item.image.replace('public/', '')}`}
+              />
             </div>
             <div>{item.theType}</div>
             <div>{item.name}</div>
