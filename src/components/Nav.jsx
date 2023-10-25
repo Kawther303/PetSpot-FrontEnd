@@ -4,7 +4,9 @@ const Nav = ({ user, handleLogOut }) => {
   let userOptions
   let admin = false
   console.log(admin)
+  console.log(user)
   if (user) {
+    console.log('usertype:', user.userType)
     if (user.userType === 'Admin') {
       userOptions = (
         <nav>
