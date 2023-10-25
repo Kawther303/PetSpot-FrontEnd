@@ -1,77 +1,45 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { showUser } from "../services/Auth"
+// import { showUser } from "../services/Auth"
 import axios from "axios"
+
 
 const Show = ({ user }) => {
   let navigate = useNavigate()
   const [newUser, setUserValue] = useState(null)
-  // {
-  // name: user.name,
-  // email: user.email,
-  // profilePicture: user.profilePicture,
-  // address: user.address,
-  // telephone: user.telephone,
-  // })
+  const [newOrder, setUserOrders] = useState(null)
+  // const [newItems, setUserItem] = useState(null)
   const imagePath = `http://localhost:3001/`
   useEffect(() => {
     const getDetails = async () => {
       const response = await axios.get(
         `http://localhost:3001/auth/show/${user.id}`
+    
       )
       setUserValue(response.data)
       console.log(user)
+      
+      const orderResponse = await axios.get(
+        `http://localhost:3001/order/${user.id}`
+      )
+      setUserOrders(orderResponse.data)
+      console.log(orderResponse.data)
+      console.log(orderResponse.data.itemType)
+      // setUserItem(orderResponse.data.orderItems)
+      // console.log(orderResponse.orderItems)
+      
+      
     }
     getDetails()
   }, [])
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target
-  //   setUserValue({
-  //     ...userValue,
-  //     [name]: value,
-  //   })
-  // }
 
-  // const handlePicChange = (e) => {
-  //   setUserValue({
-  //     ...userValue,
-  //     profilePicture: e.target.files[0],
-  //   })
-  //   console.log(e.target.files[0])
-  // }
-
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault()
-  //     const formData = new FormData()
-  //     formData.append("name", userValue.name)
-  //     formData.append("profilePicture", userValue.profilePicture)
-  //     formData.append("address", userValue.address)
-  //     formData.append("telephone", userValue.telephone)
-  //   try {
-  //     let user_id = user.id
-  //     const response = await showUser(userValue, user_id)
-  //     (formData)
-  //     setUserValue({
-  //       name: userValue.name,
-  //       email: userValue.email,
-  //       profilePicture: req.files.path,
-  //       address: userValue.address,
-  //       telephone: userValue.telephone,
-  //     })
-
-  //     navigate("/signin")
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
   return newUser ? (
     <div className="signin col main-background">
       <form className="col form-style" encType="multipart/form-data">
         <h1 className="form-heading">Profile Detail</h1>
         <br />
         <div>
-          {/* <img src="user.profilePicture.replace(/public/, '')" alt="" /> */}
          <img src={`${imagePath}${newUser.profilePicture.replace('public/', '')}`} />
         </div>
         <div className="col-md-10">
@@ -111,156 +79,106 @@ const Show = ({ user }) => {
           />
           <br />
         </div>
-      </form>
+      </form>        
+      {
+      newOrder?.map((order) => (
+        <div className="list" key={order._id
+        }>
+            <h5>Order Number:{order.orderNumber}</h5>
+            <h5>Total Amount:{order.totalAmount}</h5>
+            {/* {newOrder.orderItems?.map((item) => (
+        <div className="list" key={order._id
+        }>
+          
+          <h5>item Type:{item.itemType}</h5>
+        </div>
+          ))} */}
+            </div>
+            ))}
+          
     </div>
   ) : null
 }
 
 export default Show
 
-// import React, { useState, useEffect } from 'react'
-// import axios from 'axios'
-// import { useNavigate } from 'react-router-dom'
 
-// const Userprofile = ({ user }) => {
-//   const navigate = useNavigate()
-//   const [newUserData, setNewUserData] = useState({ ...user })
-//   const [isEditing, setIsEditing] = useState(false)
-//   const [selectedImage, setSelectedImage] = useState(null)
-//   const [userData, setUserData] = useState(null)
-//   const [loading, setLoading] = useState(false)
-//   const [error, setError] = useState(null)
+// {itemRef: '6533a29f5bae9326c1dbe5ef', itemType: 'Pet', qty: 1, price: 220, _id: '6533f3c5c547a16a837aed05'
 
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target
-//     setNewUserData({
-//       ...newUserData,
-//       [name]: value
-//     })
-//   }
 
-//   const handleImageChange = (e) => {
-//     const imageFile = e.target.files[0]
-//     setSelectedImage(imageFile)
-//   }
 
-//   const handleUpdatePassword = () => {
-//     navigate('/passwordchange')
-//   }
+// import { useState, useEffect } from "react"
+// import { useNavigate } from "react-router-dom"
+// // import { showUser } from "../services/Auth"
+// import axios from "axios"
 
-//   const hello = async () => {
-//     try {
-//       setLoading(true)
-//       setError(null)
-//       const response = await axios.get(
-//         `http://localhost:4000/userinfo/${user.id}`
-//       )
-//       setUserData(response.data)
-//     } catch (error) {
-//       setError(error)
-//     } finally {
-//       setLoading(false)
-//     }
-//   }
+// const Show = ({ user }) => {
+//   let navigate = useNavigate()
+//   const [newUser, setUserValue] = useState(null)
 
+//   const imagePath = `http://localhost:3001/`
 //   useEffect(() => {
-//     hello()
+//     const getDetails = async () => {
+//       const response = await axios.get(
+//         `http://localhost:3001/auth/show/${user.id}`
+//       )
+//       setUserValue(response.data)
+//       console.log(user)
+//     }
+//     getDetails()
 //   }, [])
 
-//   const handleUpdateProfile = async (e) => {
-//     e.preventDefault()
-//     try {
-//       setLoading(true)
-//       setError(null)
 
-//       const formData = new FormData()
-//       formData.append('firstName', newUserData.firstName)
-//       formData.append('lastName', newUserData.lastName)
-//       formData.append('email', newUserData.email)
-
-//       if (selectedImage) {
-//         formData.append('image', selectedImage)
-//       }
-
-//       const response = await axios.post(
-//         `http://localhost:4000/updateprofile/${user.id}`,
-//         formData,
-//         {
-//           headers: {
-//             'Content-Type': 'multipart/form-data'
-//           }
-//         }
-//       )
-
-//       hello()
-//       setIsEditing(false)
-//     } catch (error) {
-//       setError(error)
-//     } finally {
-//       setLoading(false)
-//     }
-//   }
-
-//   return (
-//     <div>
-//       {loading ? (
-//         <p>Loading...</p>
-//       ) : error ? (
-//         <p>Error: {error.message}</p>
-//       ) : isEditing ? (
+//   return newUser ? (
+//     <div className="signin col main-background">
+//       <form className="col form-style" encType="multipart/form-data">
+//         <h1 className="form-heading">Profile Detail</h1>
+//         <br />
 //         <div>
-//           <label htmlFor="firstName">First Name:</label>
+//         <img src={`${imagePath}${newUser.profilePicture.replace('public/', '')}`}/>
+//         </div>
+//         <div className="col-md-10">
+//           <label htmlFor="name">Name</label>
+//           <input name="name" value={newUser.name} className="form-control" />
+//         </div>
+//         <br />
+//         <div className="col-md-10">
+//           <label htmlFor="email">Email</label>
 //           <input
-//             type="text"
-//             name="firstName"
-//             value={newUserData.firstName}
-//             onChange={handleInputChange}
-//           />
-//           <label htmlFor="lastName">Last Name:</label>
-//           <input
-//             type="text"
-//             name="lastName"
-//             value={newUserData.lastName}
-//             onChange={handleInputChange}
-//           />
-//           <label htmlFor="email">Email:</label>
-//           <input
-//             type="text"
 //             name="email"
-//             value={newUserData.email}
-//             onChange={handleInputChange}
+//             type="email"
+//             value={newUser.email}
+//             required
+//             className="form-control"
 //           />
-//           <label htmlFor="image">Profile Image:</label>
+//         </div>
+
+//         <br />
+//         <div className="col-md-10">
+//           <label htmlFor="address">Address</label>
 //           <input
-//             type="file"
-//             name="image"
-//             accept="image/*"
-//             onChange={handleImageChange}
+//             name="address"
+//             type="address"
+//             value={newUser.address}
+//             className="form-control"
 //           />
-//           <button onClick={handleUpdateProfile}>Save</button>
 //         </div>
-//       ) : (
-//         <div>
-//           {userData ? (
-//             <>
-//               <img
-//                 src={`http://localhost:4000/images/${userData.image}`}
-//                 height={150}
-//                 width={100}
-//                 alt=""
-//               />
-//               <h2>Email: {userData.email}</h2>
-//               <h2>Name: {userData.firstName}</h2>
-//               <button onClick={() => setIsEditing(true)}>Edit Profile</button>
-//               <button onClick={handleUpdatePassword}>Change Password</button>
-//             </>
-//           ) : (
-//             <h1>Null</h1>
-//           )}
+//         <br />
+//         <div className="col-md-10">
+//           <label htmlFor="telephone">Telephone</label>
+//           <input
+//             name="telephone"
+//             type="telephone"
+//             value={newUser.telephone}
+//             className="form-control"
+//           />
+//           <br />
 //         </div>
-//       )}
+//       </form>
+      
 //     </div>
-//   )
+//   ) : null
 // }
 
-// export default Userprofile
+// export default Show
+

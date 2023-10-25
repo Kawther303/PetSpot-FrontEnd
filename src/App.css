@@ -16,13 +16,15 @@
   .detail, .detail-header, .listings, .home, .home div, .boat-card, .navbar {
     display: flex;
   }
-  
+  .passwordChange{
+    background-color: #D6C7AE;
+  }
   .home, .home div {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
   }
-  
+
   .detail, .boat-card, .home div {
     flex-direction: column;
   }
@@ -191,6 +193,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--secondary-bg);
+  background-color: #D6C7AE;
 }
 
 button {
@@ -293,7 +296,7 @@ form,
 .input-wrapper {
   margin: auto;
   width: 80%;
-  background-color: #B3A492;
+  background-color: #D6C7AE;
 }
 
 form label {
@@ -331,10 +334,10 @@ form button:hover {
   opacity: 0.7;
 }
 
-form button:disabled {
+/* form button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
+} */
 
 .grid {
   display: grid;
