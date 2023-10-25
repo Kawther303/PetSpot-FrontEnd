@@ -12,7 +12,6 @@ import AddPetItem from './pages/AddPetItem'
 import PetItemDetails from './pages/PetItemDetails'
 import PetDetails from './pages/PetDetails'
 import UserCart from './pages/UserCart'
-
 import { CheckSession } from './services/Auth'
 import UpdateProfile from './pages/UpdateProfile'
 import ChangePassword from './pages/ChangePassword'
@@ -46,17 +45,14 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/changepassword" element={<ChangePassword />} />
+          <Route path="/changepassword" element={<ChangePassword user={user}/>} />
           <Route path="/editprofile/" element={<UpdateProfile user={user} />} />
           <Route path="/show" element={<Show user={user} />} />
           <Route path="/pets" element={<PetsList />} />
           <Route path="/petItems" element={<PetItemList />} />
           <Route path="/addPet" element={<AddPet />} />
           <Route path="/addPetItem" element={<AddPetItem />} />
-          <Route
-            path="/petItems/:id"
-            element={<PetItemDetails user={user} />}
-          />
+          <Route path="/petItems/:id" element={<PetItemDetails user={user} />}/>
           <Route path="/userCart" element={<UserCart user={user} />} />
           <Route path="/pets/:id" element={<PetDetails user={user} />} />
         </Routes>

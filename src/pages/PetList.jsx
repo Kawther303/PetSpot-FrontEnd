@@ -16,6 +16,9 @@ const PetList = () => {
     getDetails()
   }, [])
   return (
+    <body>
+      
+   
     <div className="product-content">
       {console.log('petsList:' + petsList)}
       {petsList.map((petList) => (
@@ -41,7 +44,8 @@ const PetList = () => {
           </Link>
         </div>
       ))}
-    </div>
+    </div> 
+    </body>
   )
 }
 

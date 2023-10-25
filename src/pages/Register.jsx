@@ -8,6 +8,7 @@ const Register = () => {
     name: "",
     email: "",
     profilePicture: null,
+    userType:"Client",
     password: "",
     confirmPassword: "",
     address: "",
@@ -35,6 +36,7 @@ const Register = () => {
     formData.append("name", formValues.name)
     formData.append("email", formValues.email)
     formData.append("password", formValues.password)
+    formData.append("userType", formValues.userType)
     formData.append("profilePicture", formValues.profilePicture)
     formData.append("address", formValues.address)
     formData.append("telephone", formValues.telephone)
@@ -47,6 +49,7 @@ const Register = () => {
         password: "",
         confirmPassword: "",
         profilePicture: "",
+        userType:"Client",
         address: "",
         telephone: "",
       })
@@ -115,7 +118,6 @@ const Register = () => {
           />
         </div>
         <br />
-        <br />
         <div className="col-md-10">
           <label htmlFor="profilePicture">Profile Picture</label>
           <input
@@ -123,6 +125,18 @@ const Register = () => {
             name="profilePicture"
             type="file"
             accept="image/*"
+            required
+            className="form-control"
+          />
+        </div>
+        <br />
+        <div className="col-md-10">
+          <label htmlFor="userType">User Type</label>
+          <input
+            onChange={handleChange}
+            type="userType"
+            name="userType"
+            value="Client"
             required
             className="form-control"
           />

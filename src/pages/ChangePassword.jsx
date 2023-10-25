@@ -1,76 +1,82 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { UpdatePassword } from "../services/Auth";
+import { UpdatePassword } from "../services/Auth"
 
-const ChangePassword = ({user}) => {
-  // let navigate = useNavigate()
-  // const [oldPassword, setOldPassword] = useState({password: user.password});
-  // const [newPassword, setNewPassword] = useState("");
-  // const [errorMessage, setErrorMessage] = useState("");
+const ChangePassword = ({ user }) => {
+  let navigate = useNavigate()
+  // console.log("user info= ", user)
+  const [currentPassword, setCurrentPassword] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const [confirmNewPassword, setConfirmNewPassword] = useState("")
+  const [error, setError] = useState("")
 
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData()
-  //   formData.append("password", oldPassword.password)
-  //   try {
-  //     const response = await UpdatePassword(newPassword, oldPassword)
-  //     navigate("/signin")
-  //     // Handle success scenario
-  //     console.log("Password updated successfully");
-  //   } catch (error) {
-  //     // Handle error scenario
-  //     console.error("Error updating password:", error.response.data.msg);
-  //     setErrorMessage(error.response.data.msg);
-  //   }
-  // };
-/////////////////////////////////////////////
-  //   try {
-  //     // let user_id = user.id
-  //     const response = await UpdatePassword({
-  //       currentPassword,
-  //       newPassword,
-  //     });
+  console.log("Current password =", currentPassword)
+  console.log("new password =", newPassword)
 
-  //     // Handle success scenario
-  //     console.log("Password updated ");
-  //     navigate("/");
-  //   } catch (error) {
-  //     // Handle error scenario
-  //     console.error("Error updating", error);
-  //   }
-  // };
-//////////////////////////////////////////////
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault()
+    if (newPassword !== confirmNewPassword) {
+      setError("password must match.")
+      return
+    } else {
+      const response = await UpdatePassword(
+        currentPassword,
+        newPassword,
+        user.id
+      ).then((response) => {
+        console.log("Password updated successfully")
+      })
+      navigate("/signin").catch((error) => {
+        console.error("Password update failed:", error)
+      })
+      setError("")
+      setNewPassword("")
+      setCurrentPassword("")
+      setConfirmNewPassword("")
+    }
+  }
+
   return (
-    <div className="signin col main-background">
-    {/* <form onSubmit={handleFormSubmit}
-    className="col form-style"
-    >
-      <h1 className="form-heading">Change Password</h1>
-      <br />
-      <div className="col-md-8">
-        <label htmlFor="Current Password">Current Password</label>
+    <div className="home-container">
+      <form>
+      <div className="col form-style">
+        <h2>Change Password</h2>
+        <br />
+        <div className="col-md-10">
+        <label>Current Password:</label>
         <input
           type="password"
-          value={oldPassword}
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
           className="form-control"
-          onChange={(e) => setOldPassword(e.target.value)}
         />
-        <br />
-      </div>
-      <div className="col-md-8">
-        <label htmlFor="New Password">New Password</label>
+</div>
+<br />
+<div className="col-md-10">
+        <label>New Password:</label>
         <input
           type="password"
           value={newPassword}
-          className="form-control"
           onChange={(e) => setNewPassword(e.target.value)}
+          className="form-control"
         />
+        </div>
+        <br />
+        <div className="col-md-10">
+        <label>Confirm New Password:</label>
+        <input
+          type="password"
+          value={confirmNewPassword}
+          onChange={(e) => setConfirmNewPassword(e.target.value)}
+          className="form-control"
+        />
+        </div>
+        <br />
+        <button onClick={handleUpdatePassword}>Update Password</button>
       </div>
-      <br />
-      <button type="submit">Update Password</button>
-    </form> */}
-    </div> 
-  );
-};
+    </form>
+  </div>
+  )
+}
 
-export default ChangePassword;
+export default ChangePassword
