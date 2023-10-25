@@ -386,3 +386,12 @@ form button:disabled {
     padding: 1.5%;
     border-radius: 3%;
   }
+  .cartImage{
+width: 100px;
+height: 100px;
+  }
+
+  .cart-content{
+    display: flex;
+    direction: column;
+  }

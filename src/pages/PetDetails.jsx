@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-// import { AddCartItem } from '../services/Pet'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const PetItemDetails = ({ user }) => {
+const PetDetails = ({ user }) => {
   let navigate = useNavigate()
-  const [petItem, setPetItem] = useState(null)
+  const [pet, setPet] = useState(null)
 
   let { id } = useParams()
   console.log(id)
@@ -15,14 +14,12 @@ const PetItemDetails = ({ user }) => {
   console.log(user)
   const addToCart = async (event) => {
     try {
-      // const response = await AddCartItem(user._id)
       if (user) {
         const response = await axios.put(
-          `http://localhost:3001/cart/addItem/${user.id}/${event.target.value}`
+          `http://localhost:3001/cart/addPet/${user.id}/${event.target.value}`
         )
-        // // navigate('/userCart')
-        // console.log(response)
-        navigate('/petItems')
+
+        navigate('/pets')
       } else {
         console.log('no User')
         navigate('/signin')
@@ -33,39 +30,47 @@ const PetItemDetails = ({ user }) => {
   }
   useEffect(() => {
     const getDetails = async () => {
-      const response = await axios.get(`http://localhost:3001/petItem/${id}`)
+      const response = await axios.get(`http://localhost:3001/pet/${id}`)
       console.log(response)
-      setPetItem(response.data)
+      setPet(response.data)
     }
     getDetails()
   }, [])
-  return petItem ? (
+  return pet ? (
     <div className="product-content">
-      <div className="cards" key={petItem._id}>
+      <div className="cards" key={pet._id}>
         <section className="image-container2 ">
-          <h2>{petItem.name}</h2>
+          <h2>{pet.name}</h2>
           <div>
-            <img src={`${imagePath}${petItem.image.replace('public/', '')}`} />
+            <img src={`${imagePath}${pet.image.replace('public/', '')}`} />
           </div>
         </section>
         <section className="details">
           <div className="flex-row space">
-            <h5>Price:{petItem.price}</h5>
+            <h5>Price:{pet.price}</h5>
           </div>
           <div>
             <h5>Description:</h5>
-            <p> {petItem.description}</p>
+            <p> {pet.description}</p>
+          </div>
+          <div>
+            <h5>Age:</h5>
+            <p> {pet.age}</p>
+          </div>
+          <div>
+            <h5>For Adoption:</h5>
+            <p> {pet.forAdoption}</p>
           </div>
         </section>
       </div>
-      <button value={petItem._id} onClick={addToCart}>
+      <button value={pet._id} onClick={addToCart}>
         Add to Cart
       </button>
-      <Link to="/petItems">
+      <Link to="/pets">
         <button>Back</button>
       </Link>
     </div>
   ) : null
 }
 
-export default PetItemDetails
+export default PetDetails
