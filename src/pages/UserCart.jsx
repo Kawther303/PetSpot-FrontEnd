@@ -1,111 +1,159 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
 const UserCart = ({ user }) => {
-  const userId = user.id
-  console.log('user.id:', userId)
+  console.log('user.id:', user.id)
+
   let itemList = []
   let [cartStat, setCart] = useState(null)
-  let [itemsStat, setItems] = useState('')
-  let [petStat, setPets] = useState('')
+  let [itemsStat, setItems] = useState(null)
+  let [petsStat, setPets] = useState(null)
   let [theFinal, setFinal] = useState(null)
   let cart
   let items
   let pets
-  // const [cartItems, setCartItems] = useState('')
-  let finalList = []
+  let [iQty, setIQty] = useState(0)
+  let [iPrice, setIPrice] = useState(0)
+  let [totalPrice, setTotalPrice] = useState(0)
+  let [grantTotal, setGrantTotal] = useState(0)
 
+  let finalList = []
+  let theTotalAmount = 0
   useEffect(() => {
     getDetails()
-  }, [])
+  }, [iQty])
 
   const imagePath = `http://localhost:3001/`
-  const handleClick = (e) => {
+
+  const handleAdd = (e) => {
     e.preventDefault()
     console.log(e.target.value)
+    if (e.target.value === 'Item') {
+      reduceItem(e.target.id)
+    } else if (e.target.value === 'Item') {
+      addItem(e.target.id)
+    }
   }
+
+  const handleClick = async (e, operation, theQty) => {
+    if (operation === 'Add' && e.target.value === 'Item') {
+      console.log('Add')
+      addItem(e.target.id)
+      setIQty(theQty + 1)
+    } else if (operation === 'Reduce' && e.target.value === 'Item') {
+      reduceItem(e.target.id)
+      console.log('min')
+      setIQty(theQty - 1)
+    } else if (operation === 'Reduce' && e.target.value === 'Pet') {
+      reducePet(e.target.id)
+      setIQty(theQty - 1)
+      console.log('min')
+    } else if (operation === 'Add' && e.target.value === 'Pet') {
+      addPet(e.target.id)
+      setIQty(theQty + 1)
+      console.log('Add')
+    }
+  }
+  const reduceItem = async (delItem) => {
+    const response = await axios.get(
+      `http://localhost:3001/cart/delItem/${user.id}/${delItem}`
+    )
+    console.log(response)
+  }
+
+  const addItem = async (plusItem) => {
+    const response = await axios.put(
+      `http://localhost:3001/cart/addItem/${user.id}/${plusItem}`
+    )
+    console.log(response)
+  }
+
+  const reducePet = async (delItem) => {
+    const response = await axios.get(
+      `http://localhost:3001/cart/delPet/${user.id}/${delItem}`
+    )
+    console.log(response)
+  }
+
+  const addPet = async (plusItem) => {
+    const response = await axios.put(
+      `http://localhost:3001/cart/addPet/${user.id}/${plusItem}`
+    )
+    console.log(response)
+  }
+
+  // const delItem = async (deletedItem) => {
+  //   //should delete all same item in the array
+  //   const response = await axios.put(
+  //     `http://localhost:3001/delItem/${user.id}/${minItem}`
+  //   )
+  // }
+
   const getDetails = async () => {
-    const theCart = await axios.get(`http://localhost:3001/cart/${userId}`)
-    // console.log(theCart.data)
-    setCart(theCart.data)
-    cart = theCart.data
-    console.log('cart:', cartStat)
+    const response = await axios.get(`http://localhost:3001/cart/${user.id}`)
 
-    setItems(theCart.data.itemId)
-    setPets(theCart.data.petId)
+    cart = response.data
+    setCart(cart)
 
-    items = theCart.data.itemId
-    pets = theCart.data.petId
-    //const runFunction = await
+    setItems(response.data.itemId)
+    setPets(response.data.petId)
+
+    items = response.data.itemId
+    pets = response.data.petId
+
     getTheItems()
     console.log('final:', finalList)
   }
 
-  // count the items
-  const getItemsQuantity = async (theItem) => {
-    console.log('theItem1._id:', theItem)
-    const arr = itemList //cart.itemId
-    const elementToCount = theItem
-    let count = arr.filter((x) => x == elementToCount).length
-    console.log('ccccccc:', count)
-    return count
-  }
-
   //get the items details and unique
   const getTheItems = () => {
-    const theCartItems = items //cart.itemId
+    //const theCartItems = items
 
-    for (let c = 0; c < theCartItems.length; c++) {
-      itemList.push(theCartItems[c]._id)
+    for (let c = 0; c < items.length; c++) {
+      itemList.push(items[c]._id)
     }
 
-    console.log('itemList:', itemList)
-    console.log('items222222:', cartStat)
-
-    let result = []
     let k = []
-    let container = {}
     let found = false
     let itemCount
     for (let i = 0; i < itemList.length; ++i) {
       found = false
-      itemCount = 1
       for (let x = 0; x < k.length; x++) {
         if (itemList[i] == k[x]) {
           found = true
-          itemCount = itemCount + 1
         }
       }
       if (!found) {
         k.push(itemList[i])
-        let theItem1 = theCartItems.find((obj) => obj._id === itemList[i])
-        console.log('theItem1:::', theItem1)
+        let theItem1 = items.find((obj) => obj._id === itemList[i])
 
+        //count the item quantity
+        const arr = itemList
+        const elementToCount = theItem1._id
+        let theQty = arr.filter((x) => x == elementToCount).length
+        let id2 = theItem1._id + i
         finalList.push({
+          id2: id2,
           id: theItem1._id,
           name: theItem1.name,
           price: theItem1.price,
           image: theItem1.image,
-          // qty: getItemsQuantity(theItem1._id),
-          qty: theItem1.qtyAvailable,
+          qty: theQty,
           unit: theItem1.unit,
           theType: 'Item',
+          totalPrice: theItem1.price * parseInt(theQty),
           description: theItem1.description
         })
       }
-      console.log('count22:', itemCount)
     }
-
-    // console.log('kkkkk:', k)
-    // console.log('count:', itemCount)
-    // console.log('peeets:', pets)
 
     for (let i = 0; i < pets.length; i++) {
       let thePet1 = pets[i]
-      // console.log('peeets:', thePet1)
+      let id2 = thePet1._id + i
       finalList.push({
+        id2: id2,
         id: thePet1._id,
         name: thePet1.name,
         price: thePet1.price,
@@ -113,33 +161,38 @@ const UserCart = ({ user }) => {
         qty: 1,
         unit: '',
         theType: 'Pet',
+        totalPrice: thePet1.price,
         description: thePet1.description
       })
     }
     setFinal(finalList)
-    console.log(finalList)
+    cartTotalAmount()
+    setGrantTotal(theTotalAmount)
+  }
+  const cartTotalAmount = () => {
+    for (let i = 0; i < finalList.length; i++) {
+      theTotalAmount = theTotalAmount + finalList[i].totalPrice
+    }
   }
 
-  console.log('finals333333s:', theFinal)
+  const placeOrder = (event) => {}
 
   if (theFinal) {
     return (
       <div className="cart-content">
         <div className="header">
-          <div className="header">Item Picture </div>
-          <div className="header">Type</div>
-          <div className="header">Name</div>
-          <div className="header">price</div>
-          <div className="header">Quantity</div>
-          <div className="header">+1</div>
-          <div className="header">-1</div>
-          <div className="header">DEL</div>
+          <div className="header1">Item Picture </div>
+          <div className="header1">Type</div>
+          <div className="header1">Name</div>
+          <div className="header1">price</div>
+          <div className="header1">Quantity</div>
+          <div>Total Price</div>
+          <div></div>
+          <div></div>
         </div>
         {theFinal.map((item) => (
-          <div className="listDetails" key={item.id}>
+          <div className="listDetails" key={item.id2}>
             <div className="cartImage">
-              {/* <img src="" /> */}
-
               <img
                 className="cartImage"
                 src={`${imagePath}${item.image.replace('public/', '')}`}
@@ -149,24 +202,36 @@ const UserCart = ({ user }) => {
             <div>{item.name}</div>
             <div>{item.price} </div>
             <div>{item.qty}</div>
+            <div>{item.totalPrice} </div>
             <div>
-              <button value="plus" onClick={handleClick}>
+              <button
+                id={item.id}
+                value={item.theType}
+                onClick={(e) => handleClick(e, 'Add', item.qty)}
+              >
                 +
               </button>
-            </div>
-
-            <div>
-              <button value="min" onClick={handleClick}>
+              <button
+                id={item.id}
+                value={item.theType}
+                onClick={(e) => handleClick(e, 'Reduce', item.qty)}
+              >
                 -
               </button>
-            </div>
-            <div>
-              <button value="del" onClick={handleClick}>
+              {/* <button id={item.id} value={item.theType} onClick={handleDel}>
                 Del
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
+        <div className="totalBar">
+          <div>
+            <h2>Grand Total: {grantTotal} </h2>
+          </div>
+          <div>
+            <button onClick={placeOrder}>Place Order</button>
+          </div>
+        </div>
       </div>
     )
   } else {

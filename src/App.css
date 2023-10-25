@@ -391,7 +391,29 @@ width: 100px;
 height: 100px;
   }
 
-  .cart-content{
+  .cart-content {
+    background-color: aqua;
+  }
+
+  .listDetails, .header{
+  width: 100;
+  text-align: right;
+
+  }
+  .header {
+    background-color: #967E76;
     display: flex;
-    direction: column;
+    justify-content: space-evenly;
+
+  }
+
+  .listDetails, .totalBar {
+    background-color: beige;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: right ;
+  }
+
+  .totalBar {
+    background-color: rgb(138, 134, 136);
   }
