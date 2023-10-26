@@ -19,7 +19,7 @@ const PetDetails = ({ user }) => {
           `http://localhost:3001/cart/addPet/${user.id}/${event.target.value}`
         )
 
-        navigate('/pets')
+        navigate('/userCart')
       } else {
         console.log('no User')
         navigate('/signin')
@@ -37,38 +37,44 @@ const PetDetails = ({ user }) => {
     getDetails()
   }, [])
   return pet ? (
-    <div className="product-content">
-      <div className="cards" key={pet._id}>
-        <section className="image-container2 ">
-          <h2>{pet.name}</h2>
+    <div className="detail">
+      <div className="updetails"></div>
+      <div className="detail-header">
+        <div>
+          <img src={`${imagePath}${pet.image.replace('public/', '')}`} />
+        </div>
+
+        <div className="listing-name">
           <div>
-            <img src={`${imagePath}${pet.image.replace('public/', '')}`} />
+            <h2>{pet.name}</h2>
           </div>
-        </section>
-        <section className="details">
-          <div className="flex-row space">
-            <h5>Price:{pet.price}</h5>
-          </div>
-          <div>
-            <h5>Description:</h5>
-            <p> {pet.description}</p>
-          </div>
-          <div>
-            <h5>Age:</h5>
-            <p> {pet.age}</p>
+          <div className="info">
+            <div>
+              <h5>Price: BD {pet.price}</h5>
+            </div>
+            <div>
+              <h5>Type: {pet.petType}</h5>
+            </div>
           </div>
           <div>
-            <h5>For Adoption:</h5>
-            <p> {pet.forAdoption}</p>
+            <div className="buttom">
+              <button className="add2Cart" value={pet._id} onClick={addToCart}>
+                Add to Cart
+              </button>
+              <Link to="/pets">
+                <button className="add2Cart-b">Back</button>
+              </Link>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
-      <button value={pet._id} onClick={addToCart}>
-        Add to Cart
-      </button>
-      <Link to="/pets">
-        <button>Back</button>
-      </Link>
+      <div className="info-wrapper">
+        <div className="listing-header"></div>
+        <h5>Description:</h5>
+        <p> {pet.description}</p>
+        <h5>Age: {pet.age}</h5>
+        <h5>For Adoption:{pet.forAdoption} </h5>
+      </div>
     </div>
   ) : null
 }
