@@ -9,6 +9,11 @@ At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-fre
 
 ***
 ## Getting Started
+We utilize React JavaScript for the front end, MongoDB as the NoSQL database, and Node.js with Express for the back end, focus on key components and features. Implement user authentication for secure access, pet listings for showcasing available pets, and a shopping section for pet items. Allow users to browse and purchase pet products, add items to their cart, and proceed to checkout.
+
+In the pet listings section, provide detailed information about each pet, including their name, type, age, and description. Include appealing visuals such as photos to attract potential adopters. For the shopping section, categorize pet items, display product details, and integrate a smooth purchasing process.
+
+***
 #### Task Tracking
 [Trello board](https://trello.com/b/gcUEvDxf/project-3-pet-spot)
 
@@ -23,13 +28,14 @@ At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-fre
 
 <img width="517" alt="Screenshot 2023-09-28 025951" src="https://i.imgur.com/AmRaq4K_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
 
+#### Component Hierarchy Diagram
+[ComponentDiagram](https://app.diagrams.net/#G1ye3JgKRQmJp_d_AGJekSyG74JMhALnZp)
 
-***
-
+<img width="517" alt="Screenshot 2023-09-28 025951" src="https://i.imgur.com/qTKe9ZB_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
 
 ## Deployed app
 
-##### The project is deployed in [name](url)
+##### The project is deployed in [PetSpot](url)
 
 
 
@@ -37,5 +43,5 @@ At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-fre
 
 - [ ] adding Search featur
 - [ ] using Api to show a page of animal
-- [ ] Better styling
+- [ ] Better Css styling
 
