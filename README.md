@@ -21,7 +21,7 @@ At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-fre
 #### WireFrame
 [Figma](https://www.figma.com/file/TQqDx9sk9tieYWaTXiYDUI/Untitled?type=design&node-id=0%3A1&mode=design&t=VkgI4hunN4nnjp4J-1)
 
-<img width="517" alt="Screenshot 2023-09-28 025951" src="">
+<img width="517" alt="Screenshot 2023-09-28 025951" src="https://i.imgur.com/AmRaq4K_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
 
 
 ***
@@ -35,7 +35,7 @@ At PetSpot, we're dedicated to making pet ownership an enchanting and hassle-fre
 
 ## Future Updates
 
-- [ ] 1
-- [x] 2
-- [ ] 3
+- [ ] adding Search featur
+- [ ] using Api to show a page of animal
+- [ ] Better styling
 
