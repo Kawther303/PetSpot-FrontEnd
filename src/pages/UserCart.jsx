@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { AddOrder } from '../services/Adds'
 // import { Link } from 'react-router-dom'
 // import { useParams } from 'react-router-dom'
 
 const UserCart = ({ user }) => {
   console.log('user.id:', user.id)
-
+  let navigate = useNavigate()
   let itemList = []
   let [cartStat, setCart] = useState(null)
   let [itemsStat, setItems] = useState(null)
@@ -18,7 +20,7 @@ const UserCart = ({ user }) => {
   let [iPrice, setIPrice] = useState(0)
   let [totalPrice, setTotalPrice] = useState(0)
   let [grantTotal, setGrantTotal] = useState(0)
-
+  let naj
   let finalList = []
   let theTotalAmount = 0
   useEffect(() => {
@@ -83,13 +85,6 @@ const UserCart = ({ user }) => {
     )
     console.log(response)
   }
-
-  // const delItem = async (deletedItem) => {
-  //   //should delete all same item in the array
-  //   const response = await axios.put(
-  //     `http://localhost:3001/delItem/${user.id}/${minItem}`
-  //   )
-  // }
 
   const getDetails = async () => {
     const response = await axios.get(`http://localhost:3001/cart/${user.id}`)
@@ -175,7 +170,41 @@ const UserCart = ({ user }) => {
     }
   }
 
-  const placeOrder = (event) => {}
+  const placeOrder = async (e) => {
+    e.preventDefault()
+    let theOrderItems = []
+
+    theFinal.map((item) => {
+      theOrderItems.push({
+        itemRef: item.id,
+        itemType: item.theType,
+        qty: item.qty,
+        price: item.price
+      })
+    })
+
+    const theOrder = {
+      userId: user.id,
+      orderNumber: '0',
+      orderItems: theOrderItems,
+      totalAmount: e.target.value
+    }
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/order/newOrder',
+        theOrder
+      )
+      console.log(response)
+      const clearCart = await axios.get(
+        `http://localhost:3001/cart/clear/${user.id}`
+      )
+      console.log(clearCart)
+      navigate('/show')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   if (theFinal) {
     return (
@@ -218,9 +247,6 @@ const UserCart = ({ user }) => {
               >
                 -
               </button>
-              {/* <button id={item.id} value={item.theType} onClick={handleDel}>
-                Del
-              </button> */}
             </div>
           </div>
         ))}
@@ -229,7 +255,9 @@ const UserCart = ({ user }) => {
             <h2>Grand Total: {grantTotal} </h2>
           </div>
           <div>
-            <button onClick={placeOrder}>Place Order</button>
+            <button onClick={placeOrder} value={grantTotal}>
+              Place Order
+            </button>
           </div>
         </div>
       </div>

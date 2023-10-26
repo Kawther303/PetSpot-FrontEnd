@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AddPetItem } from '../services/Pet'
+import { AddPetItem } from '../services/Adds'
 import { useNavigate } from 'react-router-dom'
 
 const NewPetItem = () => {

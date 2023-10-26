@@ -42,17 +42,23 @@ const App = () => {
       <Nav user={user} handleLogOut={handleLogOut} />
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home user={user} />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/changepassword" element={<ChangePassword user={user}/>} />
+          <Route
+            path="/changepassword"
+            element={<ChangePassword user={user} />}
+          />
           <Route path="/editprofile/" element={<UpdateProfile user={user} />} />
           <Route path="/show" element={<Show user={user} />} />
           <Route path="/pets" element={<PetsList />} />
           <Route path="/petItems" element={<PetItemList />} />
           <Route path="/addPet" element={<AddPet />} />
           <Route path="/addPetItem" element={<AddPetItem />} />
-          <Route path="/petItems/:id" element={<PetItemDetails user={user} />}/>
+          <Route
+            path="/petItems/:id"
+            element={<PetItemDetails user={user} />}
+          />
           <Route path="/userCart" element={<UserCart user={user} />} />
           <Route path="/pets/:id" element={<PetDetails user={user} />} />
         </Routes>
