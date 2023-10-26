@@ -52,8 +52,123 @@ const NewPet = () => {
     }
   }
 
+  // return (
+  //   <div className="addForm">
+  //     <form
+  //       className="col form-style"
+  //       onSubmit={handleSubmit}
+  //       encType="multipart/form-data"
+  //     >
+  //       <h1 className="form-heading">Add New Pet</h1>
+  //       <div className="col-md-10">
+  //         <label htmlFor="name">Name</label>
+  //         <input
+  //           onChange={handleChange}
+  //           name="name"
+  //           type="text"
+  //           placeholder="Pet Name"
+  //           value={formValues.name}
+  //           required
+  //           className="form-control"
+  //         />
+  //       </div>
+  //       <br></br>
+  //       <div className="col-md-10">
+  //         <label htmlFor="age">Age</label>
+  //         <input
+  //           onChange={handleChange}
+  //           name="age"
+  //           type="text"
+  //           placeholder="1 month"
+  //           value={formValues.age}
+  //           className="form-control"
+  //         />
+  //       </div>
+  //       <br></br>
+  //       <div className="col-md-10">
+  //         <label htmlFor="petType">Type</label>
+  //         <select
+  //           onChange={handleChange}
+  //           name="petType"
+  //           value={formValues.petType}
+  //         >
+  //           {petTypes.map((pType) => (
+  //             <option value={pType}>{pType}</option>
+  //           ))}
+  //         </select>
+  //       </div>
+  //       <br></br>
+  //       <div className="col-md-10">
+  //         <label htmlFor="Description">Description</label>
+  //         <input
+  //           onChange={handleChange}
+  //           name="Description"
+  //           type="text"
+  //           placeholder=""
+  //           value={formValues.Description}
+  //           className="form-control"
+  //         />
+  //       </div>
+  //       <br></br>
+  //       <div className="col-md-10">
+  //         <label htmlFor="forAdoption">forAdoption</label>
+  //         <select
+  //           onChange={handleChange}
+  //           name="forAdoption"
+  //           value={formValues.forAdoption}
+  //         >
+  //           <option value="true">True</option>
+  //           <option value="false">False</option>
+  //         </select>
+  //       </div>
+  //       <br></br>
+  //       <div className="col-md-10">
+  //         <label htmlFor="image">Image</label>
+  //         <input
+  //           onChange={handlePicChange}
+  //           name="image"
+  //           type="file"
+  //           accept="image/*"
+  //           required
+  //           className="form-control"
+  //         />
+  //       </div>
+  //       <div className="col-md-10">
+  //         <label htmlFor="price">Price</label>
+  //         <input
+  //           onChange={handleChange}
+  //           name="price"
+  //           type="Number"
+  //           placeholder="0"
+  //           value={formValues.price}
+  //           required
+  //           className="form-control"
+  //         />
+  //       </div>
+  //       <br></br>
+  //       <div className="col-md-10">
+  //         <label htmlFor="available">Available?</label>
+  //         <select
+  //           onChange={handleChange}
+  //           name="available"
+  //           value={formValues.available}
+  //         >
+  //           <option value="true">True</option>
+  //           <option value="false">False</option>
+  //         </select>
+  //       </div>
+  //       <button
+  //         disabled={
+  //           !formValues.name || (!formValues.image && !formValues.price)
+  //         }
+  //       >
+  //         Add
+  //       </button>
+  //     </form>
+  //   </div>
+  // )
   return (
-    <div className="addForm">
+    <div className="addForm home-container">
       <form
         className="col form-style"
         onSubmit={handleSubmit}
@@ -86,8 +201,9 @@ const NewPet = () => {
         </div>
         <br></br>
         <div className="col-md-10">
-          <label htmlFor="petType">Type</label>
+          <label htmlFor="petType">Type </label>
           <select
+            className="form-select"
             onChange={handleChange}
             name="petType"
             value={formValues.petType}
@@ -113,6 +229,7 @@ const NewPet = () => {
         <div className="col-md-10">
           <label htmlFor="forAdoption">forAdoption</label>
           <select
+            className="form-select"
             onChange={handleChange}
             name="forAdoption"
             value={formValues.forAdoption}
@@ -133,6 +250,7 @@ const NewPet = () => {
             className="form-control"
           />
         </div>
+        <br />
         <div className="col-md-10">
           <label htmlFor="price">Price</label>
           <input
@@ -149,6 +267,7 @@ const NewPet = () => {
         <div className="col-md-10">
           <label htmlFor="available">Available?</label>
           <select
+            className="form-select"
             onChange={handleChange}
             name="available"
             value={formValues.available}

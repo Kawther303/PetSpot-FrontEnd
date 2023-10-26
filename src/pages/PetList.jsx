@@ -36,10 +36,10 @@ const PetList = () => {
               <div className="flex-row space">
                 <h5>Price:{petList.price}</h5>
               </div>
-              <div>
+              {/* <div>
                 <h5>Description:</h5>
                 <p> {petList.Description}</p>
-              </div>
+              </div> */}
             </section>
           </Link>
         </div>

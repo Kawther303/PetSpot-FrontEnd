@@ -63,7 +63,7 @@ const NewPetItem = () => {
   }
 
   return (
-    <div className="addForm">
+    <div className="addForm home-container">
       <form
         className="col form-style"
         onSubmit={handleSubmit}
@@ -85,7 +85,12 @@ const NewPetItem = () => {
         <br></br>
         <div className="col-md-10">
           <label htmlFor="unit">unit</label>
-          <select onChange={handleChange} name="unit" value={formValues.unit}>
+          <select
+            onChange={handleChange}
+            name="unit"
+            value={formValues.unit}
+            className="form-select"
+          >
             {units.map((unit) => (
               <option value={unit}>{unit}</option>
             ))}
@@ -98,6 +103,7 @@ const NewPetItem = () => {
             onChange={handleChange}
             name="itemType"
             value={formValues.itemType}
+            className="form-select"
           >
             {petTypes.map((pType) => (
               <option value={pType}>{pType}</option>
@@ -135,6 +141,7 @@ const NewPetItem = () => {
             onChange={handleChange}
             name="qtyAvailable"
             value={formValues.qtyAvailable}
+            className="form-control"
           />
         </div>
         <br></br>
@@ -149,6 +156,7 @@ const NewPetItem = () => {
             className="form-control"
           />
         </div>
+        <br />
         <div className="col-md-10">
           <label htmlFor="price">Price</label>
           <input

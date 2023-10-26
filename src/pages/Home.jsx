@@ -9,7 +9,7 @@ const Home = ({ user }) => {
   let navigate = useNavigate()
   if (!user) {
     return (
-      <div className="home-container col0">
+      <div className="home-container2">
         <div className="first">
           <div>
             <button onClick={() => navigate('/signin')}>
@@ -32,7 +32,7 @@ const Home = ({ user }) => {
     )
   } else {
     return (
-      <div className="home-container col0">
+      <div className="home-container2">
         <div className="first">
           <div>
             <section>
